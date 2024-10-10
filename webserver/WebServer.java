@@ -131,7 +131,7 @@ final class HttpRequest implements Runnable
             os.writeBytes(entityBody);
         }
 
-
+        //fix
         os.close();
         br.close();
         socket.close();
