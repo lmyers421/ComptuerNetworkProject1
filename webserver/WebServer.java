@@ -25,10 +25,8 @@ public final class WebServer
         while (true){
             //Listen for a TCP connection request.
             Socket socket = listenSocket.accept();
-
             //Construct an object to process the HTTP request message.
             HttpRequest request = new HttpRequest(socket);
-
             //Create a new thread to process the request.
             Thread thread = new Thread(request);
 
@@ -105,10 +103,10 @@ final class HttpRequest implements Runnable
         String contentTypeLine = null;
         String entityBody = null;
         if (fileExists){
-            statusLine = "Responding to existing file";
+            statusLine = "HTTP/1.1 200 OK";
             contentTypeLine = "Content-type: " + contentType( fileName ) + CRLF;
         } else {
-            statusLine = "File doesn't exist";  
+            statusLine = "HTTP/1.1 404 Not Found";  
             contentTypeLine = "no contents";
             entityBody = "<HTML>" +
                          "<HEAD><TITLE>Not Found</TITLE></HEAD>" +
